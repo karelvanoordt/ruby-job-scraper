@@ -24,7 +24,11 @@ def scraper_remote_ok
     end
 
     jobs.each do |j|
-        puts j[:title]
+        
+        puts "Position: #{j[:title]}"
+        puts "Company: #{j[:company]}"
+        puts "Link: #{j[:link]}"
+        puts " "
     end
 end
 
