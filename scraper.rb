@@ -2,7 +2,7 @@ require 'httparty'
 require 'nokogiri'
 require 'byebug'
 
-def scraper
+def scraper_remote_ok
     url = 'https://remoteok.com/remote-ruby-jobs'
     unparsed_page = HTTParty.get(url)
     parsed_page = Nokogiri::HTML(unparsed_page)
@@ -18,11 +18,15 @@ def scraper
         link: 'https://remoteok.com' + job_listing.css('a').first['href']
         }
 
-        jobs << job
+        unless job[:title].include? "Senior"
+            jobs << job
+        end
     end
 
-    puts jobs[12]
+    jobs.each do |j|
+        puts j[:title]
+    end
 end
 
-scraper
+scraper_remote_ok
 
